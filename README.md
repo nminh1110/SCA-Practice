@@ -35,5 +35,26 @@ Copy values from the original table
     INSERT INTO club_member_info_cleaned
     SELECT * FROM club_member_info;
 
+### Data cleaning
 
+Remove leading spaces from full_name
 
+    UPDATE club_member_info_cleaned
+    SET full_name = TRIM(full_name);
+
+Replace ages greater than 100 or missing with N/A
+
+    UPDATE club_member_info_cleaned 
+    SET age = 'N/A'
+    WHERE age > 100;
+
+Set all names to uppercase for consistency
+
+    UPDATE club_member_info_cleaned 
+    SET full_name = UPPER(full_name);
+
+Replace null values in martial_status with N/A
+
+    UPDATE club_member_info_cleaned
+    SET martial_status = 'N/A'
+    WHERE martial_status = '';
